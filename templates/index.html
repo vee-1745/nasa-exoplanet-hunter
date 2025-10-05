@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanet Hunter AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Exoplanet Hunter AI 🛰️</h1>
+        <p class="subtitle">Predict if a celestial object is a planet using data from NASA missions.</p>
+
+        <form action="/predict" method="post">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Orbital Period (days)</label>
+                    <input type="number" step="any" name="period" required title="Enter the orbital period in days" placeholder="e.g., 365.25">
+                </div>
+                <div class="input-group">
+                    <label>Transit Duration (hours)</label>
+                    <input type="number" step="any" name="duration" required title="Enter the transit duration in hours" placeholder="e.g., 10.5">
+                </div>
+                <div class="input-group">
+                    <label>Transit Depth (ppm)</label>
+                    <input type="number" step="any" name="depth" required title="Enter the transit depth in ppm" placeholder="e.g., 1500">
+                </div>
+                <div class="input-group">
+                    <label>Planet Radius (Earth radii)</label>
+                    <input type="number" step="any" name="planet_radius" required title="Enter the planet radius in Earth radii" placeholder="e.g., 1.0">
+                </div>
+                <div class="input-group">
+                    <label>Stellar Temp (K)</label>
+                    <input type="number" step="any" name="stellar_temp" required title="Enter the stellar temperature in Kelvin" placeholder="e.g., 5778">
+                </div>
+                <div class="input-group">
+                    <label>Stellar Gravity (log10 cm/s²)</label>
+                    <input type="number" step="any" name="stellar_gravity" required title="Enter the stellar gravity in log10 cm/s²" placeholder="e.g., 4.44">
+                </div>
+                <div class="input-group">
+                    <label>Stellar Radius (Solar radii)</label>
+                    <input type="number" step="any" name="stellar_radius" required title="Enter the stellar radius in Solar radii" placeholder="e.g., 1.0">
+                </div>
+            </div>
+            <button type="submit">Classify Candidate</button>
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">
+            <h2>Prediction Result</h2>
+            <p class="prediction">{{ prediction_text }}</p>
+            <p class="confidence">{{ confidence_text }}</p>
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
